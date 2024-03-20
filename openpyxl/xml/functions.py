@@ -10,32 +10,18 @@ from functools import partial
 
 from openpyxl import DEFUSEDXML, LXML
 
-if LXML is True:
-    from lxml.etree import (
-    Element,
-    SubElement,
-    register_namespace,
-    QName,
-    xmlfile,
-    XMLParser,
-    )
-    from lxml.etree import fromstring, tostring
-    # do not resolve entities
-    safe_parser = XMLParser(resolve_entities=False)
-    fromstring = partial(fromstring, parser=safe_parser)
 
-else:
-    from xml.etree.ElementTree import (
-    Element,
-    SubElement,
-    fromstring,
-    tostring,
-    QName,
-    register_namespace
-    )
-    from et_xmlfile import xmlfile
-    if DEFUSEDXML is True:
-        from defusedxml.ElementTree import fromstring
+from xml.etree.ElementTree import (
+Element,
+SubElement,
+fromstring,
+tostring,
+QName,
+register_namespace
+)
+from et_xmlfile import xmlfile
+if DEFUSEDXML is True:
+    from defusedxml.ElementTree import fromstring
 
 from xml.etree.ElementTree import iterparse
 if DEFUSEDXML is True:
